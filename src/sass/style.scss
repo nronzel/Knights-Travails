@@ -49,6 +49,7 @@ button:hover {
 
   .chessboard {
     display: flex;
+    border: 1px solid $white-square;
   }
 
   .grid-item {
