@@ -1,0 +1,90 @@
+// Color Variables
+$main-background: #334155;
+$knight-color: #f1f5f9;
+$black-square: #0f172a;
+$white-square: #64748b;
+$button-color: #cbd5e1;
+$button-hover: #f1f5f9;
+
+*,
+*:before,
+*:after {
+  box-sizing: border-box;
+  padding: 0;
+  margin: 0;
+}
+
+body {
+  background-color: $main-background;
+  height: 100vh;
+  font-size: 16px;
+}
+
+button {
+  background-color: $button-color;
+  border: 2px solid $black-square;
+  border-radius: 8px;
+  outline: none;
+}
+
+button:hover {
+  background-color: $button-hover;
+  cursor: pointer;
+}
+
+#reset {
+  background: transparent;
+  color: $knight-color;
+  border-color: $knight-color;
+}
+
+.main-container {
+  height: 100%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  position: relative;
+  gap: 1.1rem;
+
+  .chessboard {
+    display: flex;
+  }
+
+  .grid-item {
+    width: 75px;
+    height: 75px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+  }
+
+  .column {
+    width: 100%;
+    height: 100%;
+  }
+
+  .black {
+    background-color: $black-square;
+  }
+
+  .white {
+    background-color: $white-square;
+  }
+
+  button {
+    padding: 8px 10px;
+  }
+}
+
+.buttons {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-flow: column;
+  gap: 1rem;
+}
+
+.fa-chess-knight {
+  font-size: 3rem;
+  color: $knight-color;
+}
