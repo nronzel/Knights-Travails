@@ -5,6 +5,7 @@ $black-square: #0f172a;
 $white-square: #64748b;
 $button-color: #cbd5e1;
 $button-hover: #f1f5f9;
+$button-border: #e2e8f0;
 
 *,
 *:before,
@@ -22,7 +23,7 @@ body {
 
 button {
   background-color: $button-color;
-  border: 2px solid $black-square;
+  border: 2px solid $button-border;
   border-radius: 8px;
   outline: none;
 }

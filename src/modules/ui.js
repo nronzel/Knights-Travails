@@ -57,7 +57,7 @@ export default class UI {
     for (let row = 0; row < 8; row++) {
       row % 2 === 0 ? UI.drawOddRow() : UI.drawEvenRow();
     }
-
+    UI.setIndexes();
     UI.addEventListener();
   }
 
@@ -85,19 +85,38 @@ export default class UI {
   }
 
   static setIndexes() {
-    const validMoves = [
-      [1, 2],
-      [2, 1],
-      [-1, 2],
-      [-2, 1],
-      [-2, -1],
-      [-1, -2],
-      [1, -2],
-      [2, -1],
-    ];
+    const columns = [...document.querySelectorAll(".column")];
+    const children = [];
+
+    columns.forEach((column) => children.push([...column.children]));
+
+    for (let y = 0; y < children.length; y++) {
+      children[y].forEach((child) => {
+        child.setAttribute("data-y", `${y}`);
+      });
+
+      for (let x = children.length - 1; x >= 0; x--) {
+        // flips the x index so [0,0] is bottom left rather than top left
+        let remaining = children.length - 1 - x;
+
+        children.forEach((child) =>
+          child[x].setAttribute("data-x", `${remaining}`)
+        );
+      }
+    }
   }
 }
 
 // choose start position
 // choose end position
 // show shortest path to end position
+//   const validMoves = [
+//     [1, 2],
+//     [2, 1],
+//     [-1, 2],
+//     [-2, 1],
+//     [-2, -1],
+//     [-1, -2],
+//     [1, -2],
+//     [2, -1],
+//   ];
