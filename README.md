@@ -2,7 +2,7 @@
 
 The Odin Project - Knights Travails Project
 
-Given an 8x8 chessboard and one piece (the knight), choose a start position and end position and determine the shortest path between the two points the knight can take.
+Given an 8x8 chessboard and one piece (the knight), choose a start position and end position and determine the knights shortest path between the two points.
 
 ## Goal
 
