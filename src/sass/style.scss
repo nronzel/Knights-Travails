@@ -1,3 +1,5 @@
+@import url("https://fonts.googleapis.com/css2?family=Rubik&display=swap");
+
 // Color Variables
 $main-background: #334155;
 $board-bg: #94a3b8;
@@ -8,18 +10,23 @@ $button-color: #cbd5e1;
 $button-hover: #f1f5f9;
 $button-border: #e2e8f0;
 
+// Font Family
+$font-fam: "Rubik", sans-serif;
+
 *,
 *:before,
 *:after {
   box-sizing: border-box;
   padding: 0;
   margin: 0;
+  font-family: inherit;
 }
 
 body {
   background-color: $main-background;
   height: 100vh;
   font-size: 16px;
+  font-family: $font-fam;
 }
 
 button {
@@ -28,6 +35,8 @@ button {
   border-radius: 8px;
   outline: none;
   padding: 8px 10px;
+  width: 120px;
+  height: 100%;
 }
 
 button:hover {
@@ -38,16 +47,22 @@ button:hover {
 #reset {
   background: transparent;
   color: $knight-color;
-  border-color: $knight-color;
+  border: 1px solid $knight-color;
+}
+
+#reset:hover {
+  background-color: $board-bg;
+  color: $black-square;
 }
 
 .main-container {
   height: 100%;
   display: flex;
+  flex-flow: column;
   justify-content: center;
   align-items: center;
   position: relative;
-  gap: 1.1rem;
+  gap: 1.5rem;
 
   .chessboard {
     display: flex;
@@ -83,7 +98,6 @@ button:hover {
     display: flex;
     justify-content: center;
     align-items: flex-start;
-    flex-flow: column;
     gap: 1rem;
   }
 }
