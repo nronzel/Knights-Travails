@@ -40,7 +40,6 @@ class Game {
     const x = parseInt(e.target.dataset.x);
     const y = parseInt(e.target.dataset.y);
 
-    console.log(x, y);
     return [x, y];
   }
 
