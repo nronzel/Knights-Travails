@@ -1,3 +1,5 @@
+import { game } from "./gamelogic.js";
+
 export default class UI {
   static drawEvenRow() {
     const container = document.querySelector(".chessboard");
@@ -38,17 +40,18 @@ export default class UI {
   static setStartPosition(e) {
     e.preventDefault();
     const allSquares = [...document.querySelectorAll(".grid-item")];
-    allSquares.forEach((square) =>
-      square.addEventListener("click", UI.placeKnight)
-    );
+    allSquares.forEach((square) => {
+      square.addEventListener("click", UI.placeKnight);
+    });
   }
 
   static setEndPosition(e) {
     e.preventDefault();
     const allSquares = [...document.querySelectorAll(".grid-item")];
-    allSquares.forEach((square) =>
-      square.addEventListener("click", UI.placeKnight)
-    );
+    allSquares.forEach((square) => {
+      square.addEventListener("click", UI.placeKnight);
+      // square.addEventListener("click", game.setEnd);
+    });
   }
 
   static initChessboard() {
@@ -65,13 +68,18 @@ export default class UI {
     const squares = [...document.querySelectorAll(".grid-item")];
     if (e.target.tagName !== "DIV") return;
 
+    if (game.start.length > 0) game.setEnd(game.getCoords(e));
+    else game.setStart(game.getCoords(e));
+
     e.target.innerHTML = `
     <i class="fas fa-chess-knight"></i>
     `;
 
-    squares.forEach((square) =>
-      square.removeEventListener("click", UI.placeKnight)
-    );
+    squares.forEach((square) => {
+      square.removeEventListener("click", UI.placeKnight);
+    });
+
+    console.table(game);
   }
 
   static addEventListener() {
