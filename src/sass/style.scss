@@ -37,22 +37,22 @@ button {
   padding: 8px 10px;
   width: 120px;
   height: 100%;
-}
 
-button:hover {
-  background-color: $button-hover;
-  cursor: pointer;
+  &:hover {
+    background-color: $button-hover;
+    cursor: pointer;
+  }
 }
 
 #reset {
   background: transparent;
   color: $knight-color;
   border: 1px solid $knight-color;
-}
 
-#reset:hover {
-  background-color: $board-bg;
-  color: $black-square;
+  &:hover {
+    background-color: $board-bg;
+    color: $black-square;
+  }
 }
 
 .main-container {
