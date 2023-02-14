@@ -3,14 +3,19 @@ import Queue from "./queue.js";
 // TODO need to get the path to the target. Currently gets accurate number of steps to target
 
 class Node {
-  constructor(x, y, numberOfMoves) {
+  constructor(x, y, numberOfMoves, parent = null) {
     this.x = x;
     this.y = y;
     this.numberOfMoves = numberOfMoves;
+    this.parent = parent;
   }
 
   getPositionString() {
     return `${this.x}, ${this.y}`;
+  }
+
+  getParent() {
+    return this.parent;
   }
 }
 
@@ -42,18 +47,30 @@ export function getShortestPath(startX, startY, targetX, targetY) {
     const { x, y, numberOfMoves } = currentNode;
 
     if (x === targetX && y === targetY) {
-      let uniquePath = [];
+      let uniqueNodes = [];
+      let finalPath = [];
+
       for (let i = 0; i <= numberOfMoves; i++) {
-        uniquePath.push(path.findLast((item) => item.numberOfMoves === i));
+        uniqueNodes.push(path.findLast((item) => item.numberOfMoves === i));
       }
-      return numberOfMoves, uniquePath;
+
+      for (let i = 0; i < uniqueNodes.length; i++) {
+        if (uniqueNodes[i].parent === null) continue;
+        finalPath.push(uniqueNodes[i].parent);
+      }
+
+      finalPath.push([targetX, targetY]);
+      return [numberOfMoves, finalPath];
     }
 
     visitedNodes.add(currentNode.getPositionString());
 
     for (const neighbor of getNeighbors(x, y)) {
       const [neighborX, neighborY] = neighbor;
-      const neighborNode = new Node(neighborX, neighborY, numberOfMoves + 1);
+      const neighborNode = new Node(neighborX, neighborY, numberOfMoves + 1, [
+        x,
+        y,
+      ]);
 
       if (visitedNodes.has(neighborNode.getPositionString())) continue;
 

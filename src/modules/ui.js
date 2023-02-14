@@ -60,6 +60,9 @@ export default class UI {
     for (let row = 0; row < 8; row++) {
       row % 2 === 0 ? UI.drawOddRow() : UI.drawEvenRow();
     }
+
+    game.initGame();
+
     UI.setIndexes();
     UI.addEventListener();
   }
@@ -68,12 +71,16 @@ export default class UI {
     const squares = [...document.querySelectorAll(".grid-item")];
     if (e.target.tagName !== "DIV") return;
 
-    if (game.start.length > 0) game.setEnd(game.getCoords(e));
-    else game.setStart(game.getCoords(e));
+    if (game.start.length > 0) {
+      e.target.style.backgroundColor = "#06b6d4";
+      game.setEnd(game.getCoords(e));
+    } else {
+      e.target.innerHTML = `
+      <i class="fas fa-chess-knight"></i>
+      `;
 
-    e.target.innerHTML = `
-    <i class="fas fa-chess-knight"></i>
-    `;
+      game.setStart(game.getCoords(e));
+    }
 
     squares.forEach((square) => {
       square.removeEventListener("click", UI.placeKnight);
@@ -125,6 +132,25 @@ export default class UI {
     let endX = game.end[0];
     let endY = game.end[1];
 
-    console.log(getShortestPath(startX, startY, endX, endY));
+    let path = getShortestPath(startX, startY, endX, endY);
+
+    const squares = [...document.querySelectorAll(".grid-item")];
+
+    let moves = path[1].slice(1, path[1].length - 1);
+
+    squares.forEach((square) => {
+      let x = square.dataset.x;
+      let y = square.dataset.y;
+
+      for (let move of moves) {
+        if (move[0] == x && move[1] == y) {
+          square.innerHTML = `<i class="fas fa-circle"></i>`;
+        } else {
+          continue;
+        }
+      }
+    });
+
+    console.log(moves);
   }
 }
