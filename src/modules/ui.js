@@ -107,7 +107,7 @@ export default class UI {
       });
 
       for (let y = children.length - 1; y >= 0; y--) {
-        // flips the y indey so [0,0] is bottom left rather than top left
+        // flips the y index so [0,0] is bottom left rather than top left
         let remaining = children.length - 1 - y;
 
         children.forEach((child) =>
@@ -124,7 +124,7 @@ export default class UI {
     let startY = game.start[1];
     let endX = game.end[0];
     let endY = game.end[1];
-    // console.log(startX, startY, endX, endY);
+
     console.log(getShortestPath(startX, startY, endX, endY));
   }
 }
