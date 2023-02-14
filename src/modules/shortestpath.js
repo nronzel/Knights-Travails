@@ -28,19 +28,28 @@ const validMoves = [
 export function getShortestPath(startX, startY, targetX, targetY) {
   const queue = new Queue();
   const startNode = new Node(startX, startY, 0);
-  const paths = [];
+  const path = [];
 
   queue.enqueue(startNode);
 
   const visitedNodes = new Set();
 
   while (!queue.isEmpty) {
-    const node = queue.dequeue();
-    const { x, y, numberOfMoves } = node;
+    path.push(queue.dequeue());
 
-    if (x === targetX && y === targetY) return numberOfMoves;
+    const currentNode = path[path.length - 1];
 
-    visitedNodes.add(node.getPositionString());
+    const { x, y, numberOfMoves } = currentNode;
+
+    if (x === targetX && y === targetY) {
+      let uniquePath = [];
+      for (let i = 0; i <= numberOfMoves; i++) {
+        uniquePath.push(path.findLast((item) => item.numberOfMoves === i));
+      }
+      return numberOfMoves, uniquePath;
+    }
+
+    visitedNodes.add(currentNode.getPositionString());
 
     for (const neighbor of getNeighbors(x, y)) {
       const [neighborX, neighborY] = neighbor;
