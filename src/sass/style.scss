@@ -1,5 +1,5 @@
 @import url("https://fonts.googleapis.com/css2?family=Rubik&display=swap");
-@import url("https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:wght@400;500&display=swap");
+@import url("https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:wght@400;500;700&display=swap");
 
 // Color Variables
 $main-background: #334155;
@@ -110,6 +110,8 @@ button {
   width: 30%;
   height: 125px;
   font-family: $mono-fam;
+  font-weight: 700;
+  font-size: 1.1rem;
 
   .output-left {
     display: flex;
@@ -117,7 +119,7 @@ button {
     padding-left: 7px;
     // place-items: center;
     border-right: 2px solid $black-square;
-    width: 40%;
+    width: 175px;
     flex-shrink: 0;
 
     .output-titles {
@@ -140,26 +142,33 @@ button {
     }
 
     span {
-      font-weight: 500;
+      font-weight: 700;
     }
   }
+}
 
-  .output-right {
-    // display: flex;
-    // padding-top: 10px;
-    // padding-left: 8px;
-    // flex-shrink: 0;
-    // flex-grow: 0;
-    // gap: 5px;
-
-    p {
-      color: $black-square;
-      overflow-wrap: break-word;
-    }
+.output-right {
+  display: flex;
+  flex-wrap: wrap;
+  flex-grow: 0;
+  justify-content: center;
+  align-items: center;
+  height: 100%;
+  width: 425px;
+  p {
+    overflow-wrap: break-word;
+    line-height: 1rem;
+    height: 25px;
+    flex-grow: 0;
   }
 }
 
 .fa-chess-knight {
   font-size: 3rem;
   color: $knight-color;
+}
+
+.fa-circle {
+  color: #cbd5e1;
+  transition: all 1s ease;
 }

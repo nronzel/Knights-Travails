@@ -137,12 +137,10 @@ export default class UI {
   static showShortestPath(e) {
     e.preventDefault();
 
-    const movesListContainer = document.querySelector(".moves");
+    const outputRight = document.querySelector(".output-right");
     const btn = document.getElementById("path");
     const movesOutput = document.getElementById("numOfMoves");
-
-    console.log(movesListContainer);
-
+    const squares = [...document.querySelectorAll(".grid-item")];
     const startX = game.start[0];
     const startY = game.start[1];
     const endX = game.end[0];
@@ -152,21 +150,23 @@ export default class UI {
 
     const moves = path.finalPath;
 
-    const squares = [...document.querySelectorAll(".grid-item")];
-
     movesOutput.innerHTML = path.numberOfMoves;
 
     moves.slice(1, moves.length - 1).forEach((move) => {
-      movesListContainer.innerHTML += `[${move}] -> `;
+      outputRight.innerHTML += `<p>[${move}]-></p>`;
     });
 
-    movesListContainer.innerHTML += `[${moves[moves.length - 1]}]`;
+    outputRight.innerHTML += `<p>[${moves[moves.length - 1]}]</p>`;
 
     squares.forEach((square) => {
-      // let startSquareCoords = moves[0];
-      // let endSquareCoords = moves[moves.length - 1];
-      // let jumps = moves.slice(1, moves.length - 1);
-      let coords = [square.dataset.x, square.dataset.y];
+      let jumps = moves.slice(1, moves.length - 1);
+      let coords = [parseInt(square.dataset.x), parseInt(square.dataset.y)];
+
+      jumps.forEach((jump) => {
+        if (jump[0] === coords[0] && jump[1] === coords[1]) {
+          square.innerHTML = `<i class="fas fa-circle"></i>`;
+        }
+      });
     });
 
     btn.removeEventListener("click", UI.showShortestPath);
