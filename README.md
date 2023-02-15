@@ -24,7 +24,7 @@ I was able to easily get the number of moves required to get to the target squar
 
 [LIVE PREVIEW](https://nronzel.github.io/Knights-Travails/)
 
-Use the respective buttons to set a Start and End square.
+Use the respective buttons to set a Start and Target square.
 
 A knight will be placed in the start square.
 
