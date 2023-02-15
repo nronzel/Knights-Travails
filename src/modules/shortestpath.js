@@ -98,6 +98,10 @@ function getPath(startNode, finalNode) {
 
   path.push([startNode.x, startNode.y]);
 
+  // push the final node first, then the path, then the start node to get
+  // the path in reverse order, then call the .reverse() method to put
+  // in order from start coordinate to end coordinate.
+
   path.reverse();
 
   return path;
