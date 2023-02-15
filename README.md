@@ -1,6 +1,6 @@
 ![badge](https://img.shields.io/github/languages/top/nronzel/knights-travails) ![badge](https://img.shields.io/github/license/nronzel/Knights-Travails)
 
-# Knights Trevails
+# Knights Travails
 
 ## Description
 
