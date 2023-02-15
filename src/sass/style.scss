@@ -1,6 +1,6 @@
 @import url("https://fonts.googleapis.com/css2?family=Rubik&display=swap");
 @import url("https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:wght@400;500;700&display=swap");
-
+@import url("https://fonts.googleapis.com/css2?family=Montserrat+Alternates&display=swap");
 // Color Variables
 $main-background: #334155;
 $board-bg: #94a3b8;
@@ -10,10 +10,12 @@ $white-square: #64748b;
 $button-color: #cbd5e1;
 $button-hover: #f1f5f9;
 $button-border: #e2e8f0;
+$dark-text: #040a18;
 
 // Font Family
 $font-fam: "Rubik", sans-serif;
 $mono-fam: "IBM Plex Mono", monospace;
+$title-fam: "Montserrat Alternates", sans-serif;
 
 // Grid Dimensions
 $grid-height: 80px;
@@ -61,14 +63,34 @@ button {
   }
 }
 
+.title-container {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+
+  #title {
+    font-family: $title-fam;
+    font-size: clamp(4rem, 6vw, 7rem);
+    color: $button-border;
+    line-height: 1.25;
+    overflow: hidden;
+
+    span {
+      display: block;
+      animation: reveal 1.5s cubic-bezier(0.77, 0, 0.175, 1);
+    }
+  }
+}
+
 .main-container {
   height: 100%;
   display: flex;
   flex-flow: column;
-  justify-content: center;
+  justify-content: flex-start;
   align-items: center;
   position: relative;
   gap: 1.5rem;
+  margin-top: 6rem;
 
   .chessboard {
     display: flex;
@@ -117,7 +139,6 @@ button {
 .output-container {
   display: flex;
   border: 2px solid $black-square;
-  width: 30%;
   height: 125px;
   font-family: $mono-fam;
   font-weight: 700;
@@ -126,10 +147,10 @@ button {
   .output-left {
     display: flex;
     align-items: center;
-    padding-left: 7px;
+    padding: 0 7px;
     // place-items: center;
-    border-right: 2px solid $black-square;
-    width: 175px;
+    border-right: 2px solid $dark-text;
+    width: 190px;
     flex-shrink: 0;
 
     .output-titles {
@@ -141,12 +162,16 @@ button {
     .initial-output {
       display: flex;
       flex-flow: column;
-      padding-left: 15px;
+      padding-left: 25px;
       gap: 5px;
+
+      p {
+        color: $button-border;
+      }
     }
 
     p {
-      // color: $black-square;
+      color: $dark-text;
       font-size: 1rem;
       word-wrap: break-word;
     }
@@ -165,12 +190,12 @@ button {
   align-items: center;
   height: 100%;
   width: 425px;
+
   p {
     overflow-wrap: break-word;
-    line-height: 1rem;
-    height: 25px;
     flex-grow: 0;
-    font-size: 1.2rem;
+    font-size: 1.1rem;
+    color: $button-border;
   }
 }
 
@@ -186,4 +211,15 @@ button {
   transition: all 1s ease;
   font-size: 1.3rem;
   box-shadow: 0 0 15px 5px #95c5df;
+}
+
+@keyframes reveal {
+  0% {
+    transform: translate(0, 100%);
+    opacity: 0;
+  }
+  100% {
+    transform: translate(0, 0);
+    opacity: 1;
+  }
 }
