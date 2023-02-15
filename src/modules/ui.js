@@ -161,11 +161,13 @@ export default class UI {
     squares.forEach((square) => {
       let jumps = moves.slice(1, moves.length - 1);
       let coords = [parseInt(square.dataset.x), parseInt(square.dataset.y)];
+      let i = 1;
 
       jumps.forEach((jump) => {
         if (jump[0] === coords[0] && jump[1] === coords[1]) {
-          square.innerHTML = `<i class="fas fa-circle"></i>`;
+          square.innerHTML = `<i class="fas fa-circle"></i> <p>${i}</p>`;
         }
+        i++;
       });
     });
 
