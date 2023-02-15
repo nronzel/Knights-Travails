@@ -55,7 +55,7 @@ button {
 #reset {
   background: transparent;
   color: $knight-color;
-  border: 1px solid $knight-color;
+  border: 1px solid $board-bg;
 
   &:hover {
     background-color: $board-bg;
@@ -188,6 +188,7 @@ button {
   flex-grow: 0;
   justify-content: center;
   align-items: center;
+  flex-flow: column;
   height: 100%;
   width: 425px;
 
@@ -196,6 +197,17 @@ button {
     flex-grow: 0;
     font-size: 1.1rem;
     color: $button-border;
+  }
+
+  .path-title p {
+    color: $dark-text;
+  }
+
+  .path-output {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 75%;
   }
 }
 
