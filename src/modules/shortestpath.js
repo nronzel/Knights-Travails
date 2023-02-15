@@ -1,7 +1,5 @@
 import Queue from "./queue.js";
 
-// TODO gets steps but sometimes is wrong--need to fix
-
 class Node {
   constructor(x, y, numberOfMoves, parent = null) {
     this.x = x;
