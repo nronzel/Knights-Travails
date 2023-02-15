@@ -1,4 +1,4 @@
-![badge](https://img.shields.io/github/languages/top/nronzel/Knights-Travails) ![badge](https://img.shields.io/github/license/nronzel/Knights-Travails)
+![badge](https://img.shields.io/github/languages/top/nronzel/knights-travails) ![badge](https://img.shields.io/github/license/nronzel/knights-travails)
 
 # Knights Travails
 
@@ -22,7 +22,7 @@ I was able to easily get the number of moves required to get to the target squar
 
 ## Usage
 
-[LIVE PREVIEW]()
+[LIVE PREVIEW](https://nronzel.github.io/Knights-Travails/)
 
 Use the respective buttons to set a Start and End square.
 
