@@ -49,7 +49,7 @@ export default class UI {
     e.preventDefault();
     const allSquares = [...document.querySelectorAll(".grid-item")];
     allSquares.forEach((square) => {
-      square.addEventListener("click", UI.placeKnight);
+      square.addEventListener("click", UI.setStartSquareAction);
     });
   }
 
@@ -57,7 +57,7 @@ export default class UI {
     e.preventDefault();
     const allSquares = [...document.querySelectorAll(".grid-item")];
     allSquares.forEach((square) => {
-      square.addEventListener("click", UI.placeKnight);
+      square.addEventListener("click", UI.setEndSquareAction);
     });
   }
 
@@ -75,26 +75,35 @@ export default class UI {
     UI.addEventListener();
   }
 
-  static placeKnight(e) {
+  static setEndSquareAction(e) {
     const squares = [...document.querySelectorAll(".grid-item")];
-    const startOutput = document.getElementById("startOutput");
     const targetOutput = document.getElementById("targetOutput");
 
     if (e.target.tagName !== "DIV") return;
-    if (game.start.length > 0 && game.end.length > 0) return;
+    if (game.end.length > 0) return;
 
-    if (game.start.length > 0) {
-      e.target.style.backgroundColor = "#06b6d4";
-      game.setEnd(game.getCoords(e));
-      targetOutput.innerHTML = `[${game.getCoords(e)}]`;
-    } else {
-      e.target.innerHTML = `<i class="fas fa-chess-knight"></i>`;
-      game.setStart(game.getCoords(e));
-      startOutput.innerHTML = `[${game.getCoords(e)}]`;
-    }
+    e.target.style.backgroundColor = "#06b6d4";
+    game.setEnd(game.getCoords(e));
+    targetOutput.innerHTML = `[${game.getCoords(e)}]`;
 
     squares.forEach((square) => {
-      square.removeEventListener("click", UI.placeKnight);
+      square.removeEventListener("click", UI.setEndSquareAction);
+    });
+  }
+
+  static setStartSquareAction(e) {
+    const squares = [...document.querySelectorAll(".grid-item")];
+    const startOutput = document.getElementById("startOutput");
+
+    if (e.target.tagName !== "DIV") return;
+    if (game.start.length > 0) return;
+
+    e.target.innerHTML = `<i class="fas fa-chess-knight"></i>`;
+    game.setStart(game.getCoords(e));
+    startOutput.innerHTML = `[${game.getCoords(e)}]`;
+
+    squares.forEach((square) => {
+      square.removeEventListener("click", UI.setStartSquareAction);
     });
   }
 
