@@ -38,6 +38,13 @@ export default class UI {
     document.querySelector(".chessboard").innerHTML = "";
   }
 
+  static clearOuputs() {
+    document.getElementById("startOutput").innerHTML = "-";
+    document.getElementById("targetOutput").innerHTML = "-";
+    document.getElementById("numOfMoves").innerHTML = "-";
+    document.querySelector(".output-right").innerHTML = "";
+  }
+
   static setStartPosition(e) {
     e.preventDefault();
     const allSquares = [...document.querySelectorAll(".grid-item")];
@@ -56,6 +63,7 @@ export default class UI {
 
   static initChessboard() {
     UI.clearContainer();
+    UI.clearOuputs();
 
     for (let row = 0; row < 8; row++) {
       row % 2 === 0 ? UI.drawOddRow() : UI.drawEvenRow();
@@ -69,17 +77,19 @@ export default class UI {
 
   static placeKnight(e) {
     const squares = [...document.querySelectorAll(".grid-item")];
+    const startOutput = document.getElementById("startOutput");
+    const targetOutput = document.getElementById("targetOutput");
+
     if (e.target.tagName !== "DIV") return;
 
     if (game.start.length > 0) {
       e.target.style.backgroundColor = "#06b6d4";
       game.setEnd(game.getCoords(e));
+      targetOutput.innerHTML = `[${game.getCoords(e)}]`;
     } else {
-      e.target.innerHTML = `
-      <i class="fas fa-chess-knight"></i>
-      `;
-
+      e.target.innerHTML = `<i class="fas fa-chess-knight"></i>`;
       game.setStart(game.getCoords(e));
+      startOutput.innerHTML = `[${game.getCoords(e)}]`;
     }
 
     squares.forEach((square) => {
@@ -127,36 +137,38 @@ export default class UI {
   static showShortestPath(e) {
     e.preventDefault();
 
-    let startX = game.start[0];
-    let startY = game.start[1];
-    let endX = game.end[0];
-    let endY = game.end[1];
+    const movesListContainer = document.querySelector(".moves");
+    const btn = document.getElementById("path");
+    const movesOutput = document.getElementById("numOfMoves");
 
-    let path = getShortestPath(startX, startY, endX, endY);
+    console.log(movesListContainer);
 
-    console.log(path);
+    const startX = game.start[0];
+    const startY = game.start[1];
+    const endX = game.end[0];
+    const endY = game.end[1];
+
+    const path = getShortestPath(startX, startY, endX, endY);
+
+    const moves = path.finalPath;
 
     const squares = [...document.querySelectorAll(".grid-item")];
 
-    // let moves = path[1].slice(1, path[1].length - 1);
+    movesOutput.innerHTML = path.numberOfMoves;
 
-    // squares.forEach((square) => {
-    //   let x = parseInt(square.dataset.x);
-    //   let y = parseInt(square.dataset.y);
-    //   let coords = [x, y];
+    moves.slice(1, moves.length - 1).forEach((move) => {
+      movesListContainer.innerHTML += `[${move}] -> `;
+    });
 
-    //   for (let move of moves) {
-    //     if (UI.#equalsCheck(move, coords)) {
-    //       square.innerHTML = `<i class="fas fa-circle"></i>`;
-    //       console.log("located");
-    //     } else {
-    //       continue;
-    //     }
-    //   }
-    // });
-  }
+    movesListContainer.innerHTML += `[${moves[moves.length - 1]}]`;
 
-  static #equalsCheck(arr1, arr2) {
-    return JSON.stringify(arr1) === JSON.stringify(arr2);
+    squares.forEach((square) => {
+      // let startSquareCoords = moves[0];
+      // let endSquareCoords = moves[moves.length - 1];
+      // let jumps = moves.slice(1, moves.length - 1);
+      let coords = [square.dataset.x, square.dataset.y];
+    });
+
+    btn.removeEventListener("click", UI.showShortestPath);
   }
 }
