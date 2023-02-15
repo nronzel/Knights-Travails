@@ -134,23 +134,29 @@ export default class UI {
 
     let path = getShortestPath(startX, startY, endX, endY);
 
+    console.log(path);
+
     const squares = [...document.querySelectorAll(".grid-item")];
 
-    let moves = path[1].slice(1, path[1].length - 1);
+    // let moves = path[1].slice(1, path[1].length - 1);
 
-    squares.forEach((square) => {
-      let x = square.dataset.x;
-      let y = square.dataset.y;
+    // squares.forEach((square) => {
+    //   let x = parseInt(square.dataset.x);
+    //   let y = parseInt(square.dataset.y);
+    //   let coords = [x, y];
 
-      for (let move of moves) {
-        if (move[0] == x && move[1] == y) {
-          square.innerHTML = `<i class="fas fa-circle"></i>`;
-        } else {
-          continue;
-        }
-      }
-    });
+    //   for (let move of moves) {
+    //     if (UI.#equalsCheck(move, coords)) {
+    //       square.innerHTML = `<i class="fas fa-circle"></i>`;
+    //       console.log("located");
+    //     } else {
+    //       continue;
+    //     }
+    //   }
+    // });
+  }
 
-    console.log(moves);
+  static #equalsCheck(arr1, arr2) {
+    return JSON.stringify(arr1) === JSON.stringify(arr2);
   }
 }

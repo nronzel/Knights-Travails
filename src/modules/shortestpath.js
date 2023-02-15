@@ -1,6 +1,6 @@
 import Queue from "./queue.js";
 
-// TODO need to get the path to the target. Currently gets accurate number of steps to target
+// TODO gets steps but sometimes is wrong--need to fix
 
 class Node {
   constructor(x, y, numberOfMoves, parent = null) {
@@ -33,44 +33,33 @@ const validMoves = [
 export function getShortestPath(startX, startY, targetX, targetY) {
   const queue = new Queue();
   const startNode = new Node(startX, startY, 0);
-  const path = [];
 
   queue.enqueue(startNode);
 
   const visitedNodes = new Set();
 
   while (!queue.isEmpty) {
-    path.push(queue.dequeue());
-
-    const currentNode = path[path.length - 1];
+    const currentNode = queue.dequeue();
 
     const { x, y, numberOfMoves } = currentNode;
 
     if (x === targetX && y === targetY) {
-      let uniqueNodes = [];
-      let finalPath = [];
+      let finalNode = currentNode;
+      let finalPath = getPath(startNode, finalNode);
 
-      for (let i = 0; i <= numberOfMoves; i++) {
-        uniqueNodes.push(path.findLast((item) => item.numberOfMoves === i));
-      }
-
-      for (let i = 0; i < uniqueNodes.length; i++) {
-        if (uniqueNodes[i].parent === null) continue;
-        finalPath.push(uniqueNodes[i].parent);
-      }
-
-      finalPath.push([targetX, targetY]);
-      return [numberOfMoves, finalPath];
+      return { numberOfMoves, finalPath };
     }
 
     visitedNodes.add(currentNode.getPositionString());
 
     for (const neighbor of getNeighbors(x, y)) {
       const [neighborX, neighborY] = neighbor;
-      const neighborNode = new Node(neighborX, neighborY, numberOfMoves + 1, [
-        x,
-        y,
-      ]);
+      const neighborNode = new Node(
+        neighborX,
+        neighborY,
+        numberOfMoves + 1,
+        currentNode
+      );
 
       if (visitedNodes.has(neighborNode.getPositionString())) continue;
 
@@ -94,4 +83,22 @@ function getNeighbors(x, y) {
     neighbors.push([neighborX, neighborY]);
   }
   return neighbors;
+}
+
+function getPath(startNode, finalNode) {
+  let parentNode = finalNode.parent;
+  let path = [];
+
+  path.push([finalNode.x, finalNode.y]);
+
+  while (parentNode.parent !== null) {
+    path.push([parentNode.x, parentNode.y]);
+    parentNode = parentNode.parent;
+  }
+
+  path.push([startNode.x, startNode.y]);
+
+  path.reverse();
+
+  return path;
 }
