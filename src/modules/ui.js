@@ -81,6 +81,7 @@ export default class UI {
     const targetOutput = document.getElementById("targetOutput");
 
     if (e.target.tagName !== "DIV") return;
+    if (game.start.length > 0 && game.end.length > 0) return;
 
     if (game.start.length > 0) {
       e.target.style.backgroundColor = "#06b6d4";
@@ -136,6 +137,8 @@ export default class UI {
 
   static showShortestPath(e) {
     e.preventDefault();
+
+    if (game.start.length < 1 || game.end.length < 1) return;
 
     const outputRight = document.querySelector(".output-right");
     const btn = document.getElementById("path");
