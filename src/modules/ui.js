@@ -42,7 +42,7 @@ export default class UI {
     document.getElementById("startOutput").innerHTML = "-";
     document.getElementById("targetOutput").innerHTML = "-";
     document.getElementById("numOfMoves").innerHTML = "-";
-    document.querySelector(".output-right").innerHTML = "";
+    document.querySelector(".path-output").innerHTML = "";
   }
 
   static setStartPosition(e) {
@@ -140,7 +140,7 @@ export default class UI {
 
     if (game.start.length < 1 || game.end.length < 1) return;
 
-    const outputRight = document.querySelector(".output-right");
+    const outputRight = document.querySelector(".path-output");
     const btn = document.getElementById("path");
     const movesOutput = document.getElementById("numOfMoves");
     const squares = [...document.querySelectorAll(".grid-item")];
