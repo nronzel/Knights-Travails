@@ -34,7 +34,7 @@ class Game {
     this.start = [];
     this.end = [];
     this.moves = [];
-    return `Game Initialized: Start:${this.start} End:${this.end} Moves:${this.moves}`;
+    return `Game Initialized`;
   }
 }
 
