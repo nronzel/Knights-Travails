@@ -11,10 +11,6 @@ class Node {
   getPositionString() {
     return `${this.x}, ${this.y}`;
   }
-
-  getParent() {
-    return this.parent;
-  }
 }
 
 const validMoves = [
@@ -43,9 +39,9 @@ export function getShortestPath(startX, startY, targetX, targetY) {
 
     if (x === targetX && y === targetY) {
       let finalNode = currentNode;
-      let finalPath = getPath(startNode, finalNode);
+      let path = getPath(startNode, finalNode);
 
-      return { numberOfMoves, finalPath };
+      return { numberOfMoves, path };
     }
 
     visitedNodes.add(currentNode.getPositionString());
@@ -87,6 +83,10 @@ function getPath(startNode, finalNode) {
   let parentNode = finalNode.parent;
   let path = [];
 
+  // push the final node first, then the path, then the start node to get
+  // the path in reverse order, then call the .reverse() method to put
+  // in order from start coordinate to end coordinate.
+
   path.push([finalNode.x, finalNode.y]);
 
   while (parentNode.parent !== null) {
@@ -96,11 +96,5 @@ function getPath(startNode, finalNode) {
 
   path.push([startNode.x, startNode.y]);
 
-  // push the final node first, then the path, then the start node to get
-  // the path in reverse order, then call the .reverse() method to put
-  // in order from start coordinate to end coordinate.
-
-  path.reverse();
-
-  return path;
+  return path.reverse();
 }
