@@ -18,7 +18,7 @@ export default class Queue {
   }
 
   peek() {
-    if (this.isEmpty) return "Underflow: No elements in queue..";
+    if (this.isEmpty()) return "Underflow: No elements in queue..";
     return this.elements[this.head];
   }
 
