@@ -1,6 +1,6 @@
 export default class Queue {
   constructor() {
-    this.elements = [];
+    this.elements = {};
     this.head = 0;
     this.tail = 0;
   }
@@ -11,7 +11,6 @@ export default class Queue {
   }
 
   dequeue() {
-    if (this.isEmpty) return undefined;
     let item = this.elements[this.head];
     delete this.elements[this.head];
     this.head++;
@@ -19,15 +18,15 @@ export default class Queue {
   }
 
   peek() {
-    if (this.isEmpty) return undefined;
+    if (this.isEmpty()) return "Underflow: No elements in queue..";
     return this.elements[this.head];
   }
 
-  length() {
+  get length() {
     return this.tail - this.head;
   }
 
-  isEmpty() {
+  get isEmpty() {
     return this.length === 0;
   }
 }
