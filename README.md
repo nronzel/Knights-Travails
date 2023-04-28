@@ -14,9 +14,9 @@ Solving this project involved:
 - build a graph of all possible moves from the start square, based on the possible moves a knight can make.
 - each possible move is now a neighbor (or child) of the start square (the root).
 - this process is then done again for each neighbor square, adding a pointer to the respective parent node to track the path.
-- once the target is located, follow the parent pointers back to the start square and that is (one of) the shortest paths. (I say one of because there may be multiple paths, but the first one located is the one shown).
+- once the target is located, follow the parent pointers back to the start square and that is (one of) the shortest paths. ("One of" because there may be multiple valid paths, but the first one located is the one displayed).
 
-My solution implements a proper queue to avoid having to use the `.shift()` array method. This is probably a bit overkill for the project since we are dealing with such a small number of elements in the array.
+My solution implements a proper queue to avoid having to use the `.shift()` method and take advantage of the O(1) insertion of a queue. This is a bit overkill for this project since we are dealing with such a small number of elements in the array, however I saw it as a chance to practice.
 
 I was able to easily get the number of moves required to get to the target square, but it took some thinking for me to figure out how to also get the path itself. I ended up just adding a pointer to the parent node in the Node constructor to keep track of each nodes parent. Then once the target square was found I followed the parent pointers back to the start to get the trail. I'm sure there exists a more elegant solution, but I could not figure it out and mine works.
 
@@ -33,6 +33,9 @@ The target square will be set to bright blue.
 Once both are set, click the "Shortest Path" button and it will display the shortest path from the start to the target.
 
 ![screenshot](/dist/assets//imgs/screenshot.png)
+
+## Future Improvements
+- Indicator to let you know when you are actively setting a start and target square
 
 ## License
 
