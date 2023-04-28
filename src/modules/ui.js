@@ -159,8 +159,8 @@ export default class UI {
     const endY = game.end[1];
 
     const path = getShortestPath(startX, startY, endX, endY);
-
-    const moves = path.finalPath;
+    console.log(path);
+    const moves = path.path;
 
     movesOutput.innerHTML = path.numberOfMoves;
 

@@ -34,7 +34,7 @@ class Game {
     this.start = [];
     this.end = [];
     this.moves = [];
-    return `Game Initialized`;
+    console.log("Game Initialized");
   }
 }
 
