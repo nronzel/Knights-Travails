@@ -11,7 +11,7 @@ export default class Queue {
   }
 
   dequeue() {
-    if (this.isEmpty) return undefined;
+    if (this.isEmpty()) return undefined;
     let item = this.elements[this.head];
     delete this.elements[this.head];
     this.head++;
@@ -19,15 +19,15 @@ export default class Queue {
   }
 
   peek() {
-    if (this.isEmpty) return undefined;
+    if (this.isEmpty()) return undefined;
     return this.elements[this.head];
   }
 
-  get length() {
+  length() {
     return this.tail - this.head;
   }
 
-  get isEmpty() {
+  isEmpty() {
     return this.length === 0;
   }
 }
